@@ -34,10 +34,10 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-
     formData.password === formData.verifyPassword
       ? axios
-          .post(`http://127.0.0.1:8000/api/user/register/`, {
+          // .post(`http://127.0.0.1:8000/api/user/register/`, {
+          .post(`https://itamar-shop.herokuapp.com/api/user/register/`, {
             email: formData.email,
             username: formData.username,
             password: formData.password,

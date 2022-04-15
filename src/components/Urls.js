@@ -5,7 +5,7 @@
 // };
 
 const URLS = {
-  base_url: "https://itamar-shop.herokuapp.com/",
+  base_url: "https://itamar-shop.herokuapp.com/api/",
   all_products: "https://itamar-shop.herokuapp.com/api/products",
   all_categories: "https://itamar-shop.herokuapp.com/api/category_links",
 };
