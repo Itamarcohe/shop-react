@@ -23,6 +23,7 @@ import URLS from "./components/Urls";
 import axios from "axios";
 import { toast } from "react-toastify";
 import axiosInstance from "./axios";
+import addProducts from "./components/addProducts";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -180,6 +181,8 @@ export default class App extends React.Component {
                 />
               }
             />
+
+            <Route path='/add-product' element={<addProducts />} />
           </Routes>
           <Footer />
         </Router>
