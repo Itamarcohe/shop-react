@@ -104,7 +104,6 @@ const Detail = (props) => {
                           <option value='' disabled>
                             Select
                           </option>
-                          <option value='Test'>Test</option>
 
                           {colorsMapped}
                         </select>
@@ -125,8 +124,6 @@ const Detail = (props) => {
                           <option value='' disabled>
                             Select
                           </option>
-                          <option value='Test'>Test</option>
-
                           {sizesMapped}
                         </select>
                       </div>

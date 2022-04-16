@@ -133,7 +133,7 @@ function Store(props) {
                         <ul className='list-menu'>
                           <li>
                             <Link to='' onClick={getCategory}>
-                              All Products{" "}
+                              All Products
                             </Link>
                           </li>
 
