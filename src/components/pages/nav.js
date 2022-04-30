@@ -6,6 +6,7 @@ import { setCart } from "../../redux/actions/constans/reducers/cartActions";
 
 function Nav(props) {
   const cart = useSelector((state) => state.cart.cart);
+  console.log(cart);
   const dispatch = useDispatch();
 
   const handleSearchChange = (e) => {
@@ -149,8 +150,7 @@ function Nav(props) {
                           <>
                             <Link
                               to='/logout'
-                              // onClick={() => window.location.reload(false)}
-                            >
+                              onClick={() => window.location.reload()}>
                               Logout
                             </Link>
                           </>

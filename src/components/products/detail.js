@@ -13,11 +13,11 @@ const Detail = (props) => {
 
   useEffect(() => {
     axiosInstance
-      .get(`${URLS.base_url}product-detail/${id}/`)
+      .get(`product-detail/${id}/`)
       .then((response) => setProduct(response.data));
 
     axiosInstance
-      .get(`${URLS.base_url}variation-detail/${id}/`)
+      .get(`variation-detail/${id}/`)
       .then((response) => setVariation(response.data));
   }, []);
 
