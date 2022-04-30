@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import URLS from "../Urls";
+import axiosInstance from "../../axios";
 // import { base_url } from "./components/Urls";
 
 toast.configure();
@@ -39,8 +40,8 @@ function Register() {
     e.preventDefault();
     console.log(formData);
     formData.password === formData.verifyPassword
-      ? axios
-          .post(`${URLS.base_url}user/register/`, {
+      ? axiosInstance
+          .post(`user/register/`, {
             email: formData.email,
             username: formData.username,
             password: formData.password,
