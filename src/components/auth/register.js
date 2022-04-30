@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import URLS from "../Urls";
+// import { base_url } from "./components/Urls";
 
 toast.configure();
 function Register() {
@@ -38,7 +40,7 @@ function Register() {
     console.log(formData);
     formData.password === formData.verifyPassword
       ? axios
-          .post(`https://itamar-shop.herokuapp.com/api/user/register/`, {
+          .post(`${URLS.base_url}user/register/`, {
             email: formData.email,
             username: formData.username,
             password: formData.password,
@@ -126,15 +128,12 @@ function Register() {
                 {/* form-group// */}
               </form>
             </article>
-            {/* card-body.// */}
           </div>{" "}
-          {/* card .// */}
           <p className='text-center mt-4'>
             Have an account?<Link to='/sign-in'> Log In</Link>
           </p>
           <br />
           <br />
-          {/* ============================ COMPONENT REGISTER  END.// ================================= */}
         </section>
       </div>
     </>

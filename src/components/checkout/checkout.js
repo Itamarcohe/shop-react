@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
 import { useSelector } from "react-redux";
+import axiosInstance from "../../axios";
 
 function Checkout(props) {
   const cart = useSelector((state) => state.cart.cart);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
+import axiosInstance from "../../axios";
 import { useSelector } from "react-redux";
 
 function Payment(props) {

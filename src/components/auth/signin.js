@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
+import axiosInstance from "../../axios";
 
 function SignIn(props) {
   const history = useNavigate();
@@ -50,13 +50,11 @@ function SignIn(props) {
         <section
           className='section-conten padding-y'
           style={{ minHeight: "84vh" }}>
-          {/* ============================ COMPONENT LOGIN   ================================= */}
           <div
             className='card mx-auto'
             style={{ maxWidth: "380px", marginTop: "100px" }}>
             <div className='card-body'>
               <h4 className='card-title mb-4'>Sign in</h4>
-
               <form noValidate>
                 <div className='form-group'>
                   <input
@@ -66,8 +64,7 @@ function SignIn(props) {
                     name='email'
                     onChange={handleChange}
                   />
-                </div>{" "}
-                {/* form-group// */}
+                </div>
                 <div className='form-group'>
                   <input
                     type='password'
@@ -76,20 +73,17 @@ function SignIn(props) {
                     name='password'
                     onChange={handleChange}
                   />
-                </div>{" "}
-                {/* form-group// */}
+                </div>
                 <div className='form-group'>
                   <Link to='\' className='float-right'>
                     Forgot password?
                   </Link>
-                </div>{" "}
-                {/* form-group form-check .// */}
+                </div>
                 <div className='form-group'>
                   <button
                     type='submit'
                     className='btn btn-primary btn-block'
                     onClick={handleSubmit}>
-                    {" "}
                     Login
                   </button>
                 </div>
@@ -106,53 +100,5 @@ function SignIn(props) {
     </>
   );
 }
-
-//  class SignIn extends React.Component {
-
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       }
-
-//   }
-
-//   render() {
-
-//     return (
-//       <>
-//   <div>
-//   <section className="section-conten padding-y" style={{minHeight: '84vh'}}>
-//     {/* ============================ COMPONENT LOGIN   ================================= */}
-//     <div className="card mx-auto" style={{maxWidth: '380px', marginTop: '100px'}}>
-//       <div className="card-body">
-//         <h4 className="card-title mb-4">Sign in</h4>
-//         <form>
-//           <div className="form-group">
-//             <input type="email" className="form-control" placeholder="Email Address" />
-//           </div> {/* form-group// */}
-//           <div className="form-group">
-//             <input type="password" className="form-control" placeholder="Password" />
-//           </div> {/* form-group// */}
-//           <div className="form-group">
-//             <a href="#" className="float-right">Forgot password?</a>
-//           </div> {/* form-group form-check .// */}
-//           <div className="form-group">
-//             <button type="submit" className="btn btn-primary btn-block"> Login</button>
-//           </div> {/* form-group// */}
-//         </form>
-//       </div> {/* card-body.// */}
-//     </div> {/* card .// */}
-//     <p className="text-center mt-4">Don't have account? <Link to="/user/create">Sign up</Link></p>
-//     <br /><br />
-//     {/* ============================ COMPONENT LOGIN  END.// ================================= */}
-//   </section>
-//   {/* ========================= SECTION CONTENT END// ========================= */}
-//   {/* ========================= FOOTER ========================= */}
-// </div>
-
-//       </>
-//     );
-//   }
-// }
 
 export default SignIn;

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import axiosInstance from "../axios";
-import { setCart } from "../redux/actions/constans/reducers/cartActions";
+import axiosInstance from "../../axios";
+import { setCart } from "../../redux/actions/constans/reducers/cartActions";
 
 function Nav(props) {
   const inputEl = useRef("");
@@ -10,9 +10,10 @@ function Nav(props) {
   const dispatch = useDispatch();
 
   const fetchCart = async () => {
-    const response = await axiosInstance.get(`cart/get_cart`).catch((err) => {
-      // console.log("Attempt to fetch cart while doesnt exist dont relate", err);
-    });
+    const response = await axiosInstance
+      .get(`cart/get_cart`)
+      .catch((err) => {});
+    console.log(response);
     if (response) {
       dispatch(setCart(response.data));
     }
@@ -157,22 +158,17 @@ function Nav(props) {
                           />
                         </svg>
                       </div>
+
                       <span className='badge badge-pill badge-danger notify'>
                         {cart.reduce((acc, cur) => acc + cur.quantity, 0)}
                       </span>
                     </Link>
-                  </div>{" "}
-                  {/* widgets-wrap.// */}
-                </div>{" "}
-                {/* col.// */}
-              </div>{" "}
-              {/* row.// */}
-            </div>{" "}
-            {/* container.// */}
-          </section>{" "}
-          {/* header-main .// */}
-        </header>{" "}
-        {/* section-header.// */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </header>
       </div>
     </div>
   );

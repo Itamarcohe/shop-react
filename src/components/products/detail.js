@@ -1,8 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import axiosInstance from "../axios";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import URLS from "./Urls";
+import URLS from "../Urls";
+import axiosInstance from "../../axios";
 
 const Detail = (props) => {
   const [size, setSize] = useState("");
@@ -11,14 +10,13 @@ const Detail = (props) => {
 
   const { id } = useParams();
   const [product, setProduct] = useState();
-  // const cart = useSelector((state) => state.cart.cart);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`${URLS.base_url}product-detail/${id}/`)
       .then((response) => setProduct(response.data));
 
-    axios
+    axiosInstance
       .get(`${URLS.base_url}variation-detail/${id}/`)
       .then((response) => setVariation(response.data));
   }, []);
@@ -59,8 +57,6 @@ const Detail = (props) => {
 
   const sizesMapped = variationDisplayFactory("size");
   const colorsMapped = variationDisplayFactory("color");
-
-  // const productInCart = cart.some((c) => c.product.id === parseInt(id));
 
   return (
     <>
@@ -143,29 +139,6 @@ const Detail = (props) => {
                         </button>
                       </>
                     )}
-
-                    {/*                     
-                    {productInCart && (
-                      <>
-                        <Link to='/cart' className='btn  btn-success'>
-                          <span className='text'>Added to cart</span>{" "}
-                          <i className='fas fa-check' />
-                        </Link>
-
-                        <Link to='/cart' className='btn  btn-outline-primary'>
-                          <span className='text'>View Cart</span>{" "}
-                          <i className='fas fa-eye' />
-                        </Link>
-                      </>
-                    )}
-                    {!productInCart && product.stock > 0 && (
-                      <button
-                        className='btn  btn-primary'
-                        onClick={() => handleAddToCart(product.id)}>
-                        <span className='text'>Add to cart</span>{" "}
-                        <i className='fas fa-shopping-cart' />
-                      </button>
-                    )} */}
                   </article>
                 </main>
               </div>
