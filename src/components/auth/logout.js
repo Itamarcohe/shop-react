@@ -12,7 +12,10 @@ export default function Logout(props) {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     axiosInstance.defaults.headers["Authorization"] = null;
-    // history("/sign-in");
+    props.HandleAddCart();
+
+    // props.setIsLogged((oldValue) => false);
+    history("/sign-in");
   });
   return <div>Logout</div>;
 }

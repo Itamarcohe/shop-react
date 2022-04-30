@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Carousel from "react-bootstrap/Carousel";
+import Spinner from "react-bootstrap/Spinner";
 
 function Home(props) {
   console.log(props);
@@ -84,9 +85,11 @@ function Home(props) {
             </header>
 
             <div className='row'>
-              {props.data.data
-                ? displayHomeProducts
-                : "Didn't found home paginated products"}
+              {props.data.data ? (
+                displayHomeProducts
+              ) : (
+                <Spinner animation='border' variant='primary' />
+              )}
             </div>
             <nav className='mt-4' aria-label='Page navigation sample'>
               <ReactPaginate

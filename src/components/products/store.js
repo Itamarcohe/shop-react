@@ -84,10 +84,6 @@ export default function Store(props) {
     </li>
   ));
 
-  // const allProducts = () => {
-  //   cat
-  // }
-
   return (
     <>
       <div>

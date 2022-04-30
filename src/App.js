@@ -134,7 +134,12 @@ export default function App(props) {
           />
           <Route
             path='/logout'
-            element={<Logout notifySuccess={notifySuccess} />}
+            element={
+              <Logout
+                notifySuccess={notifySuccess}
+                HandleAddCart={HandleAddCart}
+              />
+            }
           />
           <Route path='/user/create' element={<Register />} />
           <Route

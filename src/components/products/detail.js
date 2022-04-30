@@ -21,7 +21,7 @@ const Detail = (props) => {
       .then((response) => setVariation(response.data));
   }, []);
 
-  function handleAddToCart() {
+  const handleAddToCart = () => {
     if (size === "" || color === "") {
       props.notifyFail("Please choose color/size");
     } else {
@@ -36,7 +36,7 @@ const Detail = (props) => {
           );
         });
     }
-  }
+  };
 
   function variationDisplayFactory(variation_category) {
     const withDuplicates = variation
@@ -55,15 +55,14 @@ const Detail = (props) => {
     return displayValues;
   }
 
-  const sizesMapped = variationDisplayFactory("size");
-  const colorsMapped = variationDisplayFactory("color");
+  const sizesMapped = () => variationDisplayFactory("size");
+  const colorsMapped = () => variationDisplayFactory("color");
 
   return (
     <>
       {product && (
         <section className='section-content padding-y bg'>
           <div className='container'>
-            {/* ============================ COMPONENT 1 ================================= */}
             <div className='card'>
               <div className='row no-gutters'>
                 <aside className='col-md-6'>
@@ -162,8 +161,7 @@ const Detail = (props) => {
                       </span>
                       <h6 className='mb-1'>Mike John </h6>
                     </div>
-                  </div>{" "}
-                  {/* icontext.// */}
+                  </div>
                   <div className='mt-3'>
                     <p>
                       Dummy comment Lorem ipsum dolor sit amet, consectetur

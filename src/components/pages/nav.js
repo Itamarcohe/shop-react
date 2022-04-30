@@ -5,6 +5,7 @@ import axiosInstance from "../../axios";
 import { setCart } from "../../redux/actions/constans/reducers/cartActions";
 
 function Nav(props) {
+  const [reload, setReload] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
   console.log(cart);
   const dispatch = useDispatch();
@@ -150,7 +151,9 @@ function Nav(props) {
                           <>
                             <Link
                               to='/logout'
-                              onClick={() => window.location.reload()}>
+                              // onClick={() => setReload((oldValue) => !oldValue)}
+                              // onClick={() => window.location.reload()}
+                            >
                               Logout
                             </Link>
                           </>
@@ -184,11 +187,9 @@ function Nav(props) {
                         </div>
 
                         <span className='badge badge-pill badge-danger notify'>
-                          {cart.reduce((acc, cur) => acc + cur.quantity, 0)}
-
-                          {/* {cart
+                          {window.localStorage.getItem(["access_token"])
                             ? cart.reduce((acc, cur) => acc + cur.quantity, 0)
-                            : 0} */}
+                            : 0}
                         </span>
                       </Link>
                     </div>
