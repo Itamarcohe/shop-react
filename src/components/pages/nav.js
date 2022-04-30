@@ -143,22 +143,21 @@ function Nav(props) {
                   <div className='col-lg-3 col-sm-6 col-8 order-2 order-lg-3'>
                     <div className='d-flex justify-content-end mb-3 mb-lg-0'>
                       <div className='widget-header'>
-                        <small className='title text-muted'>
-                          Welcome guest!
-                        </small>
+                        {window.localStorage.getItem(["username"]) ? (
+                          <div style={{ textAlign: "center" }}>
+                            <small className='title text-muted'>
+                              Welcome{" "}
+                              {window.localStorage.getItem(["username"])}!
+                            </small>
 
-                        {window.localStorage.getItem(["access_token"]) ? (
-                          <>
-                            <Link
-                              to='/logout'
-                              // onClick={() => setReload((oldValue) => !oldValue)}
-                              // onClick={() => window.location.reload()}
-                            >
-                              Logout
-                            </Link>
-                          </>
+                            <Link to='/logout'>Logout</Link>
+                          </div>
                         ) : (
                           <>
+                            <small className='title text-muted'>
+                              Welcome guest!
+                            </small>
+
                             <Link to='/sign-in'>Sign in</Link>
                             <span className='dark-transp'> | </span>
                             <Link to='/user/create'> Register</Link>

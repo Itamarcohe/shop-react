@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios";
+import jwt_decode from "jwt-decode";
 
 function SignIn(props) {
   const history = useNavigate();
@@ -34,6 +35,10 @@ function SignIn(props) {
         if (res) {
           localStorage.setItem("access_token", res.data.access);
           localStorage.setItem("refresh_token", res.data.refresh);
+          localStorage.setItem(
+            "username",
+            jwt_decode(res.data.access).username
+          );
           axiosInstance.defaults.headers["Authorization"] =
             "JWT " + localStorage.getItem("access_token");
           props.HandleAddCart();

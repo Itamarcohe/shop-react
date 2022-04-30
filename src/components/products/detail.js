@@ -55,8 +55,8 @@ const Detail = (props) => {
     return displayValues;
   }
 
-  const sizesMapped = () => variationDisplayFactory("size");
-  const colorsMapped = () => variationDisplayFactory("color");
+  const sizesMapped = variationDisplayFactory("size");
+  const colorsMapped = variationDisplayFactory("color");
 
   return (
     <>

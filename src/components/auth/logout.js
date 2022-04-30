@@ -11,6 +11,7 @@ export default function Logout(props) {
     });
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
+    localStorage.removeItem("username");
     axiosInstance.defaults.headers["Authorization"] = null;
     props.HandleAddCart();
 
