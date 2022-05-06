@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import URLS from "../Urls";
 import ReactPaginate from "react-paginate";
 import Spinner from "react-bootstrap/Spinner";
 import axiosInstance from "../../axios";
 
 export default function Store(props) {
+  console.log(props.data);
+  console.log(props.data.max_price);
+
   const [PriceRange, setPriceRange] = useState({
     startRange: 0,
-    maxRange: 2000,
+    maxRange: props.data.max_price,
   });
 
-  const [catLinks, setCatLinks] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const pageCount = Math.ceil(props.data.total / 12);
 
@@ -54,13 +55,35 @@ export default function Store(props) {
     });
   }
 
+  const [catLinks, setCatLinks] = useState([]);
   useEffect(() => {
-    // const category = `?category=${props.categoryFilter}`;
     axiosInstance.get(`category_links`).then((res) => setCatLinks(res.data));
   }, []);
 
+  const handleCategoryFilter = (e) => {
+    props.setCategoryFilter(e.target.name);
+    props.setPage(1);
+  };
+
+  const handlePriceFilter = (e) => {
+    console.log(e.target.name);
+    console.log("i reached here");
+    props.setPriceSort(e.target.name);
+    props.setPage(1);
+  };
+
+  let CategoriesMapped = catLinks.map((category) => (
+    <li key={category.id}>
+      <Link to='' name={category.category_name} onClick={handleCategoryFilter}>
+        {category.category_name}
+      </Link>
+    </li>
+  ));
+
   function getCategory(event) {
     console.log("event.target.name");
+    console.log(event.target.name);
+
     const filterCategory = event.target.name;
     props.setCategoryFilter(filterCategory);
     props.setSearchText("");
@@ -75,14 +98,6 @@ export default function Store(props) {
       };
     });
   }
-
-  let CategoriesMapped = catLinks.map((category) => (
-    <li key={category.id}>
-      <Link to='' name={category.category_name} onClick={getCategory}>
-        {category.category_name}
-      </Link>
-    </li>
-  ));
 
   return (
     <>
@@ -99,26 +114,53 @@ export default function Store(props) {
                         data-toggle='collapse'
                         data-target='#collapse_1'>
                         <i className='icon-control fa fa-chevron-down' />
-                        <h6 className='title'>Categories</h6>
+                        <h6 className='title'>Sort price</h6>
                       </Link>
                     </header>
-
                     <div
                       className='filter-content collapse show'
                       id='collapse_1'>
                       <div className='card-body'>
                         <ul className='list-menu'>
                           <li>
-                            <Link to='' onClick={props.seeAll}>
+                            <Link to='' name='asc' onClick={handlePriceFilter}>
+                              Ascending
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to='' name='desc' onClick={handlePriceFilter}>
+                              Descending
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <header className='card-header'>
+                      <Link
+                        to=''
+                        data-toggle='collapse'
+                        data-target='#collapse_1'>
+                        <i className='icon-control fa fa-chevron-down' />
+                        <h6 className='title'>Categories</h6>
+                      </Link>
+                    </header>
+                    <div
+                      className='filter-content collapse show'
+                      id='collapse_1'>
+                      <div className='card-body'>
+                        <ul className='list-menu'>
+                          <li>
+                            <Link to='' onClick={handleCategoryFilter}>
                               All Products
                             </Link>
                           </li>
-
                           {CategoriesMapped}
                         </ul>
                       </div>
                     </div>
                   </article>
+
                   {/* <article className='filter-group'>
                     <header className='card-header'>
                       <Link
@@ -155,7 +197,7 @@ export default function Store(props) {
                     </div>
                   </article> */}
 
-                  <form>
+                  {/* <form>
                     <article className='filter-group'>
                       <header className='card-header'>
                         <Link
@@ -200,7 +242,7 @@ export default function Store(props) {
                         </div>
                       </div>
                     </article>
-                  </form>
+                  </form> */}
                 </div>
               </aside>
               <main className='col-md-9'>

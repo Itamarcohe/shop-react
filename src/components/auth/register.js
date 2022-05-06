@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import URLS from "../Urls";
 import axiosInstance from "../../axios";
-// import { base_url } from "./components/Urls";
 
 toast.configure();
 function Register() {

@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import URLS from "../Urls";
 import axiosInstance from "../../axios";
 
 const Detail = (props) => {

@@ -3,18 +3,36 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
+import axiosInstance from "../../axios";
 
 function Home(props) {
   console.log(props);
-  const PageCount = Math.ceil(props.data.total / 12);
-  const onNextPage = () => {
-    props.setPage((oldValue) => oldValue);
-    console.log("triggerd");
+
+  // const onNextPage = () => {
+  //   props.setPage((oldValue) => oldValue);
+  //   console.log("triggerd");
+  // };
+
+  const [homePage, setHomePage] = useState(1);
+  const [homeProducts, setHomeProducts] = useState([]);
+  const HomePageCount = Math.ceil(homeProducts.total / 12);
+
+  const changePage = ({ selected }) => {
+    console.log(`selected ${selected}`);
+    setHomePage(selected + 1);
   };
 
+  useEffect(() => {
+    console.log("in use fetching products called app useeffect");
+    axiosInstance
+      .get(`search/?page=${homePage}`)
+      .then((res) => setHomeProducts(res.data));
+    console.log(homeProducts);
+  }, [homePage]);
+
   let displayHomeProducts = false;
-  if (props.data.data) {
-    displayHomeProducts = props.data.data.map((product) => {
+  if (homeProducts.data) {
+    displayHomeProducts = homeProducts.data.map((product) => {
       const { id, images, product_name, price } = product;
       const product_url = `/product-detail/${id}`;
       return (
@@ -39,6 +57,7 @@ function Home(props) {
     <>
       <div>
         {/* here */}
+
         <section className='section-intro padding-y-sm'>
           <div className='container'>
             <div className='intro-banner-wrap'>
@@ -75,17 +94,19 @@ function Home(props) {
         <section className='section-name padding-y-sm'>
           <div className='container'>
             <header className='section-heading'>
-              <Link
-                to='\'
-                className='btn btn-outline-primary float-right'
-                onClick={props.seeAll}>
-                See all
-              </Link>
-              <h3 className='section-title'>Popular products</h3>
+              <div className='form-inline'>
+                {homeProducts.total ? (
+                  <>
+                    <b>{homeProducts.total} items found</b>
+                  </>
+                ) : (
+                  <Spinner animation='border' variant='primary' />
+                )}
+              </div>
             </header>
 
             <div className='row'>
-              {props.data.data ? (
+              {displayHomeProducts ? (
                 displayHomeProducts
               ) : (
                 <Spinner animation='border' variant='primary' />
@@ -95,8 +116,8 @@ function Home(props) {
               <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
-                pageCount={PageCount}
-                onPageChange={props.changePage}
+                pageCount={HomePageCount}
+                onPageChange={changePage}
                 containerClassName={"paginationBttns"}
                 previousLinkClassName={"previousBttn"}
                 nextLinkClassName={"nextBttn"}

@@ -30,11 +30,11 @@ function Checkout(props) {
                     />
                   </div>
                   <figcaption className='info'>
-                    <a
-                      href='{{ cart_item.product.get_url }}'
+                    <Link
+                      to={`/product-detail/${c.product.id}`}
                       className='title text-dark'>
                       {c.product.product_name}
-                    </a>
+                    </Link>
                     <div className='text-muted small'>
                       amount: {c.quantity}
                       {variationDisplay}

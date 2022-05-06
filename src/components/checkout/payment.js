@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../axios";
 import { useSelector } from "react-redux";
 
@@ -37,11 +37,11 @@ function Payment(props) {
                     />
                   </div>
                   <figcaption className='info'>
-                    <a
-                      href='{{ cart_item.product.get_url }}'
+                    <Link
+                      to={`/product-detail/${c.product.id}`}
                       className='title text-dark'>
                       {c.product.product_name}
-                    </a>
+                    </Link>
                     <div className='text-muted small'>
                       amount: {c.quantity}
                       {variationDisplay}

@@ -7,7 +7,7 @@ import "./css/responsive.css.map";
 import "./css/ui.css";
 import "./css/ui.css.map";
 import Footer from "./components/pages/footer";
-import Nav from "./components/pages/nav";
+import Nav from "./components/pages/Navbar";
 import Home from "./components/pages/home";
 // shop pages
 import Store from "./components/products/store";
@@ -18,7 +18,7 @@ import Payment from "./components/checkout/payment";
 import Register from "./components/auth/register";
 import SignIn from "./components/auth/signin";
 import Logout from "./components/auth/logout";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import axiosInstance from "./axios";
@@ -29,8 +29,8 @@ export default function App(props) {
   const [searchText, setSearchText] = useState("");
   const [clickAddCart, setClickAddCart] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
-
   const [triggerSearch, setTriggerSearch] = useState(false);
+  const [priceSort, setPriceSort] = useState(null);
 
   const HandleAddCart = () => {
     setClickAddCart((oldValue) => !oldValue);
@@ -44,14 +44,12 @@ export default function App(props) {
   useEffect(() => {
     console.log("in use fetching products called app useeffect");
     axiosInstance
-      .get(`search/?page=${page}&s=${searchText}&category=${categoryFilter}`)
+      .get(
+        `search/?page=${page}&s=${searchText}&category=${categoryFilter}&sort=${priceSort}`
+      )
       .then((res) => setProducts(res.data));
-  }, [page, categoryFilter, triggerSearch]);
-
-  const seeAll = () => {
-    setSearchText("");
-    setCategoryFilter("");
-  };
+    console.log(categoryFilter);
+  }, [page, categoryFilter, triggerSearch, priceSort]);
 
   function notifyFail(message) {
     toast.error(message);
@@ -70,6 +68,18 @@ export default function App(props) {
     window.location.reload(false);
   };
 
+  const [catLinks, setCatLinks] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get(`category_links`).then((res) => setCatLinks(res.data));
+  }, []);
+
+  // const handleCategoryFilter = (e) => {
+  //   console.log(e.target.name);
+  //   console.log("i reached here");
+  //   setCategoryFilter(e.target.name);
+  // };
+
   return (
     <>
       <Router>
@@ -79,8 +89,11 @@ export default function App(props) {
           setSearchText={setSearchText}
           setProducts={setProducts}
           data={products}
-          setCategoryFilter={setCategoryFilter}
+          // handleCategoryFilter={handleCategoryFilter}
           setTriggerSearch={setTriggerSearch}
+          catLinks={catLinks}
+          setCategoryFilter={setCategoryFilter}
+          setPage={setPage}
         />
 
         <Routes>
@@ -88,13 +101,14 @@ export default function App(props) {
             path='/store'
             element={
               <Store
+                setPriceSort={setPriceSort}
                 data={products}
                 changePage={changePage}
                 page={page}
                 setCategoryFilter={setCategoryFilter}
-                categoryFilter={categoryFilter}
-                seeAll={seeAll}
                 setSearchText={setSearchText}
+                catLinks={catLinks}
+                setPage={setPage}
               />
             }
           />
@@ -110,18 +124,7 @@ export default function App(props) {
               />
             }
           />
-          <Route
-            exact
-            path='/'
-            element={
-              <Home
-                data={products}
-                changePage={changePage}
-                page={page}
-                seeAll={seeAll}
-              />
-            }
-          />
+          <Route exact path='/' element={<Home />} />
           <Route
             path='/sign-in'
             element={

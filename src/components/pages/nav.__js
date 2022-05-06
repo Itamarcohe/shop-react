@@ -32,7 +32,6 @@ function Nav(props) {
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(props.searchText);
     console.log(props.searchText.trim().length);
     const searchText = props.searchText.trim();
     if (searchText.length > 0) {
@@ -157,7 +156,6 @@ function Nav(props) {
                             <small className='title text-muted'>
                               Welcome guest!
                             </small>
-
                             <Link to='/sign-in'>Sign in</Link>
                             <span className='dark-transp'> | </span>
                             <Link to='/user/create'> Register</Link>
