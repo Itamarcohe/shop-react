@@ -74,12 +74,6 @@ export default function App(props) {
     axiosInstance.get(`category_links`).then((res) => setCatLinks(res.data));
   }, []);
 
-  // const handleCategoryFilter = (e) => {
-  //   console.log(e.target.name);
-  //   console.log("i reached here");
-  //   setCategoryFilter(e.target.name);
-  // };
-
   return (
     <>
       <Router>
@@ -109,6 +103,7 @@ export default function App(props) {
                 setSearchText={setSearchText}
                 catLinks={catLinks}
                 setPage={setPage}
+                setTriggerSearch={setTriggerSearch}
               />
             }
           />

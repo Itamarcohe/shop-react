@@ -43,13 +43,15 @@ const Header = (props) => {
     const searchText = props.searchText.trim();
     if (searchText.length > 0) {
       console.log("im here");
-      props.setCategoryFilter(" ");
+      props.setCategoryFilter("");
       props.setTriggerSearch((oldValue) => !oldValue);
       history("store");
     } else if (searchText.length === 0) {
       props.setSearchText("");
-      props.setCategoryFilter(" ");
-      props.setTriggerSearch((oldValue) => !oldValue);
+      props.setCategoryFilter("");
+      history("store");
+
+      // props.setTriggerSearch((oldValue) => !oldValue);
     }
   };
 
@@ -69,7 +71,6 @@ const Header = (props) => {
   const navCategories = catLinks.map((cat) => {
     return (
       <NavDropdown.Item
-        // href='\store'
         name={cat.category_name}
         key={cat.id}
         onClick={handleCategoryFilter}>

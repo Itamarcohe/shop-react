@@ -5,14 +5,6 @@ import Spinner from "react-bootstrap/Spinner";
 import axiosInstance from "../../axios";
 
 export default function Store(props) {
-  console.log(props.data);
-  console.log(props.data.max_price);
-
-  const [PriceRange, setPriceRange] = useState({
-    startRange: 0,
-    maxRange: props.data.max_price,
-  });
-
   const [pageNumber, setPageNumber] = useState(0);
   const pageCount = Math.ceil(props.data.total / 12);
 
@@ -89,15 +81,11 @@ export default function Store(props) {
     props.setSearchText("");
   }
 
-  function orderPrice(event) {
-    const { name, value, type, checked } = event.target;
-    setPriceRange((prevState) => {
-      return {
-        ...prevState,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
+  const clearFilters = () => {
+    props.setSearchText("");
+    props.setCategoryFilter("");
+    props.setTriggerSearch((oldValue) => !oldValue);
+  };
 
   return (
     <>
@@ -151,8 +139,8 @@ export default function Store(props) {
                       <div className='card-body'>
                         <ul className='list-menu'>
                           <li>
-                            <Link to='' onClick={handleCategoryFilter}>
-                              All Products
+                            <Link to='' onClick={clearFilters}>
+                              All Products | clear filters
                             </Link>
                           </li>
                           {CategoriesMapped}
@@ -160,89 +148,6 @@ export default function Store(props) {
                       </div>
                     </div>
                   </article>
-
-                  {/* <article className='filter-group'>
-                    <header className='card-header'>
-                      <Link
-                        to=''
-                        data-toggle='collapse'
-                        data-target='#collapse_4'
-                        aria-expanded='true'>
-                        <i className='icon-control fa fa-chevron-down' />
-                        <h6 className='title'>Sizes </h6>
-                      </Link>
-                    </header>
-                    <div
-                      className='filter-content collapse show'
-                      id='collapse_4'
-                      style={{}}>
-                      <div className='card-body'>
-                        <label className='checkbox-btn'>
-                          <input type='checkbox' />
-                          <span className='btn btn-light'> XS </span>
-                        </label>
-                        <label className='checkbox-btn'>
-                          <input type='checkbox' />
-                          <span className='btn btn-light'> SM </span>
-                        </label>
-                        <label className='checkbox-btn'>
-                          <input type='checkbox' />
-                          <span className='btn btn-light'> LG </span>
-                        </label>
-                        <label className='checkbox-btn'>
-                          <input type='checkbox' />
-                          <span className='btn btn-light'> XXL </span>
-                        </label>
-                      </div>
-                    </div>
-                  </article> */}
-
-                  {/* <form>
-                    <article className='filter-group'>
-                      <header className='card-header'>
-                        <Link
-                          to=''
-                          data-toggle='collapse'
-                          data-target='#collapse_3'
-                          aria-expanded='true'>
-                          <i className='icon-control fa fa-chevron-down' />
-                          <h6 className='title'>Price range </h6>
-                        </Link>
-                      </header>
-                      <div
-                        className='filter-content collapse show'
-                        id='collapse_3'
-                        style={{}}>
-                        <div className='card-body'>
-                          <div className='form-row'>
-                            <div className='form-group col-md-6'>
-                              <label>Min</label>
-
-                              <input
-                                onChange={orderPrice}
-                                className='mr-2 form-control'
-                                name='startRange'
-                                value={PriceRange.startRange}
-                              />
-                            </div>
-                            <div className='form-group text-right col-md-6'>
-                              <label>Max</label>
-                              <input
-                                className='mr-2 form-control'
-                                onChange={orderPrice}
-                                name='maxRange'
-                                value={PriceRange.maxRange}
-                              />
-                            </div>
-                          </div>
-
-                          <button className='btn btn-block btn-primary'>
-                            Apply
-                          </button>
-                        </div>
-                      </div>
-                    </article>
-                  </form> */}
                 </div>
               </aside>
               <main className='col-md-9'>
