@@ -14,8 +14,6 @@ export default function Logout(props) {
     localStorage.removeItem("username");
     axiosInstance.defaults.headers["Authorization"] = null;
     props.HandleAddCart();
-
-    // props.setIsLogged((oldValue) => false);
     history("/sign-in");
   });
   return <div>Logout</div>;

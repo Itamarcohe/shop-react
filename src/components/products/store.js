@@ -153,12 +153,10 @@ export default function Store(props) {
               <main className='col-md-9'>
                 <header className='border-bottom mb-4 pb-3'>
                   <div className='form-inline'>
-                    {props.data.total ? (
-                      <>
-                        <b>{props.data.total} items found</b>
-                      </>
-                    ) : (
+                    {props.loading ? (
                       <Spinner animation='border' variant='primary' />
+                    ) : (
+                      <b>{props.data.total} items found</b>
                     )}
                   </div>
                 </header>

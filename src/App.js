@@ -9,6 +9,7 @@ import "./css/ui.css.map";
 import Footer from "./components/pages/footer";
 import Nav from "./components/pages/Navbar";
 import Home from "./components/pages/home";
+import Comments from "./components/pages/comments";
 // shop pages
 import Store from "./components/products/store";
 import Detail from "./components/products/detail";
@@ -31,6 +32,7 @@ export default function App(props) {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [priceSort, setPriceSort] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const HandleAddCart = () => {
     setClickAddCart((oldValue) => !oldValue);
@@ -42,12 +44,18 @@ export default function App(props) {
   };
 
   useEffect(() => {
+    setLoading(true);
     console.log("in use fetching products called app useeffect");
     axiosInstance
       .get(
         `search/?page=${page}&s=${searchText}&category=${categoryFilter}&sort=${priceSort}`
       )
-      .then((res) => setProducts(res.data));
+      .then((res) => setProducts(res.data))
+      .catch((err) => {
+        console.log(`entered error since no data attempt ${err}`);
+      });
+    setLoading(false);
+
     console.log(categoryFilter);
   }, [page, categoryFilter, triggerSearch, priceSort]);
 
@@ -78,12 +86,12 @@ export default function App(props) {
     <>
       <Router>
         <Nav
+          loading={loading}
           clickAddCart={clickAddCart}
           searchText={searchText}
           setSearchText={setSearchText}
           setProducts={setProducts}
           data={products}
-          // handleCategoryFilter={handleCategoryFilter}
           setTriggerSearch={setTriggerSearch}
           catLinks={catLinks}
           setCategoryFilter={setCategoryFilter}
@@ -91,6 +99,7 @@ export default function App(props) {
         />
 
         <Routes>
+          <Route path='/comments' element={<Comments />} />
           <Route
             path='/store'
             element={
@@ -107,7 +116,7 @@ export default function App(props) {
               />
             }
           />
-          ;
+
           <Route
             path='/product-detail/:id'
             element={
@@ -119,6 +128,7 @@ export default function App(props) {
               />
             }
           />
+
           <Route exact path='/' element={<Home />} />
           <Route
             path='/sign-in'

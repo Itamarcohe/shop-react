@@ -5,6 +5,7 @@ import axiosInstance from "../../axios";
 
 function CartPage(props) {
   const cart = useSelector((state) => state.cart.cart);
+
   function handleDeleteCartItem(id) {
     console.log(id);
     axiosInstance.delete(`cart/remove-cart-item/${id}`).then((res) => {

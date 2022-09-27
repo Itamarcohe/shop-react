@@ -17,6 +17,7 @@ const Header = (props) => {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
   const history = useNavigate();
+
   const handleSearchChange = (e) => {
     const newValue = e.target.value;
     props.setSearchText((oldValue) => newValue);
@@ -147,8 +148,6 @@ const Header = (props) => {
           <Nav>
             <NavDropdown title='Categories'>{navCategories}</NavDropdown>
             <Nav.Link href='\store'>Store</Nav.Link>
-            {/* <Nav.Link href='#about-us'>About Us</Nav.Link>
-            <Nav.Link href='#contact-us'>Contact Us</Nav.Link> */}
           </Nav>
           <Form className='d-flex' style={{ alignItems: "center" }}>
             <FormControl
